@@ -7,11 +7,70 @@ import logoIcono from './assets/logo.png';
 
 export default function EstudioAnaFernandez() {
   const [nombre, setNombre] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [motivo, setMotivo] = useState('');
   const [consulta, setConsulta] = useState('');
+  const [enviando, setEnviando] = useState(false);
+  const [mostrarModalExito, setMostrarModalExito] = useState(false);
 
-  const handleEnviarConsulta = (e) => {
+  const handleEnviarConsulta = async (e) => {
     e.preventDefault();
-    alert(`Simulación: Consulta enviada al Estudio de la Dra. Ana Fernandez. ¡Mensaje recibido!`);
+    setEnviando(true);
+
+    // Mapeo de valores técnicos a etiquetas legibles para el mensaje
+    const motivosLabels = {
+      civil: "Derecho Civil (Contratos, Alquileres, Daños)",
+      comercial: "Derecho Comercial & Societario",
+      laboral_trabajador: "Derecho Laboral (Defensa del Trabajador)",
+      laboral_empresa: "Asesoramiento Laboral Empresarial",
+      familia: "Familia (Divorcios, Alimentos)",
+      sucesiones: "Sucesiones y Herencias",
+      otro: "Otro Motivo / Consulta General"
+    };
+
+    const motivoTexto = motivosLabels[motivo] || "No especificado";
+
+    try {
+      // --- PASO A: ENVÍO DE DATOS A FORMSPREE
+      const FORMSPREE_ID = "mrewdbwv"; // Reemplazar por el tuyo o el de la Dra.
+      
+      await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: nombre,
+          telefono: telefono,
+          motivo: motivoTexto,
+          mensaje: consulta
+        })
+      });
+
+      // --- PASO B: REDIRECCIÓN A WHATSAPP
+      const numeroDra = "5493757449422"; 
+
+      let mensajeWhatsApp = `⚖️ *NUEVA CONSULTA LEGAL - DRA. ANA FERNÁNDEZ*\n\n`;
+      mensajeWhatsApp += `👤 *Cliente:* ${nombre}\n`;
+      mensajeWhatsApp += `📞 *Teléfono:* ${telefono}\n`;
+      mensajeWhatsApp += `📂 *Área:* ${motivoTexto}\n\n`;
+      mensajeWhatsApp += `💬 *Consulta:* \n"${consulta}"\n\n`;
+      mensajeWhatsApp += `⏳ _Enviado automáticamente desde la plataforma web._`;
+
+      const mensajeEncriptado = encodeURIComponent(mensajeWhatsApp);
+      window.open(`https://wa.me/${numeroDra}?text=${mensajeEncriptado}`, '_blank');
+
+      // Limpiar el formulario tras el envío exitoso
+      setNombre('');
+      setTelefono('');
+      setMotivo('');
+      setConsulta('');
+      setMostrarModalExito(true);
+
+    } catch (error) {
+      console.error("Error al despachar la consulta:", error);
+      alert("Hubo un inconveniente al procesar tu consulta, por favor intenta directamente por WhatsApp.");
+    } finally {
+      setEnviando(false);
+    }
   };
 
   // Áreas de práctica para demostrarle que entendés su rubro
@@ -228,7 +287,7 @@ export default function EstudioAnaFernandez() {
 
             <form onSubmit={handleEnviarConsulta} className="bg-slate-800 border border-slate-700/60 p-6 sm:p-8 rounded-2xl text-left flex flex-col gap-5 shadow-xl">
               
-              {/* Fila doble: Nombre y Teléfono (En PC se ve uno al lado del otro, en celu vertical) */}
+              {/* Nombre y Teléfono */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Nombre Completo</label>
@@ -246,23 +305,24 @@ export default function EstudioAnaFernandez() {
                   <input 
                     type="tel"
                     required
+                    value={telefono}
+                    onChange={(e) => setTelefono(e.target.value)}
                     placeholder="Ej: 3757 123456"
                     className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 transition-all"
                   />
                 </div>
               </div>
 
-              {/* NUEVO: Selector de Área Legal / Motivo de Consulta */}
+              {/* Selector de Área Legal */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Motivo Principal de la Consulta</label>
                 <div className="relative">
-                  {/* AGREGAMOS defaultValue="" ACÁ */}
                   <select 
                     required
-                    defaultValue=""
+                    value={motivo}
+                    onChange={(e) => setMotivo(e.target.value)}
                     className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-hidden focus:border-amber-500 transition-all appearance-none cursor-pointer"
                   >
-                    {/* SACAMOS EL ATRIBUTO selected DE ACÁ, DEJAMOS SOLO disabled Y hidden */}
                     <option value="" disabled hidden>Seleccione el área correspondiente...</option>
                     <option value="civil">Derecho Civil (Contratos, Alquileres, Daños)</option>
                     <option value="comercial">Derecho Comercial & Societario</option>
@@ -294,13 +354,19 @@ export default function EstudioAnaFernandez() {
               {/* Botón de envío */}
               <button 
                 type="submit"
-                className="w-full bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold text-xs sm:text-sm py-4 rounded-xl transition-all shadow-md uppercase tracking-wider mt-2 cursor-pointer"
+                disabled={enviando}
+                className={`w-full text-slate-950 font-bold text-xs sm:text-sm py-4 rounded-xl transition-all shadow-md uppercase tracking-wider mt-2 cursor-pointer ${
+                  enviando 
+                    ? 'bg-amber-600/50 text-slate-700 cursor-not-allowed' 
+                    : 'bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700'
+                }`}
               >
-                Solicitar Evaluación de Caso
+                {enviando ? "Procesando Solicitud..." : "Solicitar Evaluación de Caso"}
               </button>
             </form>
           </div>
         </section>
+
 
         {/* SECCIÓN: UBICACIÓN / GOOGLE MAPS */}
         <section className="bg-white py-16 px-4 sm:px-6 border-t border-slate-200/60">
@@ -320,7 +386,7 @@ export default function EstudioAnaFernandez() {
               <div className="flex flex-col gap-2 mt-2 text-xs sm:text-sm text-slate-700 font-medium">
                 <div className="flex items-center justify-center md:justify-start gap-2">
                   <span className="text-amber-600">📍</span>
-                  <span>Pancho Ramírez 10, N3370 Puerto Iguazú, Misiones</span>
+                  <span>Horacio Quiroga 63, N3370 Puerto Iguazú, Misiones</span>
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-2">
                   <span className="text-amber-600">⏰</span>
@@ -427,6 +493,40 @@ export default function EstudioAnaFernandez() {
         <span className="absolute inset-0 rounded-full bg-amber-500/10 animate-ping pointer-events-none group-hover:bg-amber-500/20"></span>
         <i className="fa-brands fa-whatsapp text-2xl text-amber-500 relative z-10 filter drop-shadow-sm group-hover:rotate-12 transition-transform duration-300"></i>
       </a>
+
+      {/* MODAL DE ÉXITO ESTILIZADO */}
+      {mostrarModalExito && (
+        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-xs z-50 flex items-center justify-center p-4 animate-fadeIn">
+          <div className="bg-slate-800 border border-slate-700 max-w-md w-full rounded-2xl p-6 text-center shadow-2xl relative flex flex-col gap-4">
+            
+            {/* Icono de balanza / éxito */}
+            <div className="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto text-2xl border border-amber-500/20">
+              ⚖️
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <h3 className="text-xl font-serif font-bold text-white">Consulta Recibida</h3>
+              <p className="text-amber-400 text-xs font-bold uppercase tracking-widest">Estudio Jurídico Dra. Ana Fernández</p>
+            </div>
+
+            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+              Los detalles de su caso han sido registrados en nuestro sistema de forma estrictamente confidencial. Se ha enviado una copia a nuestro correo oficial y se ha generado la comunicación vía WhatsApp.
+            </p>
+
+            <div className="bg-slate-900/60 border border-slate-700/40 rounded-xl p-3 text-left text-[11px] text-slate-400">
+              <span className="font-bold text-slate-300 block mb-1">Próximo paso:</span>
+              Evaluaremos la información provista para asignarle una entrevista presencial o virtual a la brevedad.
+            </div>
+
+            <button
+              onClick={() => setMostrarModalExito(false)}
+              className="w-full bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold text-xs py-3 rounded-xl uppercase tracking-wider transition-all shadow-md cursor-pointer mt-2"
+            >
+              Entendido
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

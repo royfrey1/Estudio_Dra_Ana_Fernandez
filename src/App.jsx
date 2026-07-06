@@ -476,9 +476,27 @@ export default function EstudioAnaFernandez() {
           </section>    
 
       {/* FOOTER */}
-      <footer className="bg-slate-950 text-slate-400 text-[11px] sm:text-xs py-6 text-center border-t border-slate-900">
-        © {new Date().getFullYear()} Estudio Jurídico <span className="text-amber-500 hover:text-amber-400 underline" >Dra. Ana Fernandez</span>. Todos los derechos reservados.
-        <span> Desarrollado por <a href="https://portfolio-royf.vercel.app/" target="_blank" rel="noreferrer" className="text-amber-500 hover:text-amber-400 underline">Roy Frey</a></span>
+      <footer className="bg-slate-950 text-slate-400 text-xs py-8 px-4 sm:px-6 border-t border-slate-900 mt-auto">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+          <div className="flex items-center">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="group flex items-center gap-2 text-slate-400 hover:text-amber-400 text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-amber-500/40 transition-colors">
+              ▲
+              </span>
+              Volver arriba
+            </button>
+          </div>
+
+            <div className="text-center text-[11px] text-slate-500 font-medium">
+              &copy; {new Date().getFullYear()} Estudio Jurídico <span className="text-slate-300">Dra. Ana Fernández</span>. Todos los derechos reservados. Desarrollado por <span> <a href="https://portfolio-royf.vercel.app/" target="_blank" rel="noreferrer" className="text-amber-500 hover:text-amber-400 underline">Roy Frey</a></span>
+            </div>
+            <div className="hidden md:block w-40 text-[12px] text-slate-600 font-mono">
+              ⚖️ Mat. Profesional N° 12345 - Misiones, Argentina.
+            </div>
+        </div>
       </footer>
 
       {/* BOTÓN FLOTANTE DE WHATSAPP ELEGANTE */}

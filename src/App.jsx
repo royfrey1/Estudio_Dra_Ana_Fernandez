@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import image1 from './assets/civil.avif';
 import image2 from './assets/laboral.avif'; 
 import image3 from './assets/familiar.avif';
@@ -13,6 +13,8 @@ export default function EstudioAnaFernandez() {
   const [consulta, setConsulta] = useState('');
   const [enviando, setEnviando] = useState(false);
   const [mostrarModalExito, setMostrarModalExito] = useState(false);
+ 
+  const [menuAbierto, setMenuAbierto] = useState(false);
 
   const handleEnviarConsulta = async (e) => {
     e.preventDefault();
@@ -77,63 +79,149 @@ export default function EstudioAnaFernandez() {
   
   const especialidades = [
     { 
-      titulo: "Familia, Niñez y Adolescencia", 
-      desc: "Especialización en divorcios, responsabilidad parental, cuotas alimentarias, regímenes de comunicación, violencia familiar y protección integral de los derechos de NNA.",
-      imagen: image3
+      titulo: "Derecho de Familia", 
+      desc: "Abordaje integral en procesos de divorcio, responsabilidad parental, fijación de cuotas alimentarias, regímenes de comunicación y protección ante situaciones de violencia familiar.",
+      imagen: image3 // Vinculá tu variable de imagen correspondiente
     },
     { 
-      titulo: "Derecho Civil, Comercial y Sucesiones", 
-      desc: "Asesoramiento procesal avanzado en contratos, reclamos por daños y perjuicios, gestiones sucesorias, herencias y derecho societario integral.",
-      imagen: image1
+      titulo: "Derecho Civil y Sucesiones", 
+      desc: "Gestión experta en redacción y revisión de contratos, demandas por daños y perjuicios, juicios sucesorios, declaratorias de herederos y planificación patrimonial eficaz.",
+      imagen: image1 // Vinculá tu variable de imagen correspondiente
     },
     { 
-      titulo: "Derecho Laboral y Riesgos de Trabajo", 
-      desc: "Especialización y actualización en relaciones de trabajo, despidos, accidentes laborales (ART), paritarias y asesoramiento corporativo.",
-      imagen: image2
+      titulo: "Derecho Penal (Derivado)", 
+      desc: "Asistencia jurídica estratégica y defensa técnica en el fuero penal, brindando soluciones eficaces derivadas de contingencias patrimoniales, familiares o contractuales.",
+      imagen: image2 // Vinculá tu variable de imagen correspondiente
     },
   ];
+
+  useEffect(() => {
+    if (menuAbierto) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    // Limpieza al desmontar el componente por seguridad
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [menuAbierto]);
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] text-slate-800 font-sans antialiased">
       
-      <nav className="border-b border-slate-200/60 bg-white/90 backdrop-blur sticky top-0 z-50 px-4 sm:px-8 py-4 flex justify-between items-center shadow-xs">
-        {/* imagen y los textos agrupados en un contenedor flexible alineado al centro */}
-        <div className="flex items-center gap-3">
+      <nav className="border-b border-slate-200/60 bg-white/90 backdrop-blur sticky top-0 z-50 shadow-xs w-full transition-all duration-300">
+      
+        {/* CONTENEDOR PRINCIPAL INTERNO */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center">
           
-          {/* IMAGEN DEL LOGO */}
-          <img 
-            src={logoIcono} 
-            alt="Logo A|F & Asociados" 
-            className="w-10 h-10 object-contain sm:w-12 sm:h-12" // En celu mide 40px y en PC 48px, ideal para un navbar
-          />
+          {/* IZQUIERDA: LOGO Y NOMBRE */}
+          <a href="#hero" className="flex items-center gap-2 sm:gap-3 group cursor-pointer shrink-0">
+            <img 
+              src={logoIcono} 
+              alt="Logo A|F & Asociados" 
+              className="w-8 h-8 sm:w-10 lg:w-11 h-auto object-contain transition-transform duration-300 group-hover:scale-102" 
+            />
+            <div className="flex flex-col">
+              <span className="text-sm sm:text-lg lg:text-xl font-serif font-bold tracking-wide text-amber-400 uppercase leading-none">
+                A|F & Asociados
+              </span>
+              <span className="text-[8px] sm:text-[10px] lg:text-xs font-medium tracking-widest text-slate-900 font-sans uppercase mt-0.5 lg:mt-1 leading-none">
+                Estudio Jurídico
+              </span>
+            </div>
+          </a>
 
-          <div className="flex flex-col">
-            <span className="text-xl sm:text-2xl font-serif font-bold tracking-wide text-amber-400 uppercase leading-none">
-              A|F & Asociados
-            </span>
-            <span className="text-xs sm:text-sm font-medium tracking-widest text-slate-900 font-sans uppercase mt-1 leading-none">
-              Estudio Jurídico
-            </span>
+          {/* CENTRO: ENLACES INTERNOS (Ocultos hasta pantallas grandes 'lg') */}
+          <div className="hidden lg:flex items-center justify-center lg:gap-8 mx-4">
+            <a href="#sobre-mi" className="text-slate-600 hover:text-amber-600 text-sm font-medium transition-colors whitespace-nowrap">
+              Sobre Mí
+            </a>
+            <a href="#academia" className="text-slate-600 hover:text-amber-600 text-sm font-medium transition-colors whitespace-nowrap">
+              Formación Académica
+            </a>
+            <a href="#especialidades" className="text-slate-600 hover:text-amber-600 text-sm font-medium transition-colors whitespace-nowrap">
+              Especialidades
+            </a>
+            <a href="#porqueelegirnos" className="text-slate-600 hover:text-amber-600 text-sm font-medium transition-colors whitespace-nowrap">
+              Por qué elegirnos
+            </a>
+          </div>
+
+          {/* DERECHA: WHATSAPP Y HAMBURGUESA */}
+          <div className="shrink-0 flex items-center gap-2">
+            <a 
+              href="https://wa.me/5493757449422?text=Hola%20Dra.%20Ana%20Fernandez..."
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block whitespace-nowrap border border-amber-400/40 bg-linear-to-r from-amber-500/10 to-amber-600/10 hover:from-amber-500 hover:to-amber-600 hover:text-white text-amber-700 font-bold rounded-md transition-all uppercase tracking-wider cursor-pointer
+                        text-[10px] sm:text-xs px-2.5 py-1.5 sm:px-4 sm:py-2"
+            >
+              WhatsApp <span className="hidden sm:inline">Directo</span>
+            </a>
+
+            {/* BOTÓN HAMBURGUESA INTERACTIVO (Visible en móvil y tablet) */}
+            <button 
+              onClick={() => setMenuAbierto(!menuAbierto)}
+              className="lg:hidden p-1.5 text-slate-600 hover:text-amber-600 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer" 
+              aria-label="Toggle menú"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {menuAbierto ? (
+                  // Icono X (Cerrar)
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  // Icono Hamburguesa (Abrir)
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
 
         </div>
 
-        <div>
-          <a 
-            href="https://wa.me/5493757449422?text=Hola%20Dra.%20Ana%20Fernandez%2C%20vi%20el%20boceto%20de%20su%20sitio%20web%20y%20me%20gustar%C3%ADa%20realizar%20una%20consulta%20legal.%20Quedo%20atento%2Fa%20para%20coordinar%20una%20entrevista.%20Muchas%20gracias."
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block whitespace-nowrap border border-amber-400/40 bg-linear-to-r from-amber-500/10 to-amber-600/10 hover:from-amber-500 hover:to-amber-600 hover:text-white text-amber-700 font-bold text-xs px-3 py-2 sm:px-4 rounded-md transition-all uppercase tracking-wider cursor-pointer"
-          >
-            WhatsApp <span className="hidden sm:inline">Directo</span>
-          </a>
+        {/* MENÚ DESPLEGABLE MÓVIL/TABLET (Animado por estado de React) */}
+        <div className={`lg:hidden border-t border-slate-100 bg-white transition-all duration-300 overflow-hidden ${menuAbierto ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+          {/* Agregamos "items-end" para tirar los elementos a la derecha */}
+          <div className="px-6 pt-2.5 pb-4 flex flex-col items-end gap-3 shadow-inner">
+            <a 
+              href="#sobre-mi" 
+              onClick={() => setMenuAbierto(false)}
+              className="text-slate-600 hover:text-amber-600 text-xs sm:text-sm font-medium py-1.5 border-b border-slate-50 transition-colors w-full text-right"
+            >
+              Sobre Mí
+            </a>
+            <a 
+              href="#academia" 
+              onClick={() => setMenuAbierto(false)}
+              className="text-slate-600 hover:text-amber-600 text-xs sm:text-sm font-medium py-1.5 border-b border-slate-50 transition-colors w-full text-right"
+            >
+              Formación Académica
+            </a>
+            <a 
+              href="#especialidades" 
+              onClick={() => setMenuAbierto(false)}
+              className="text-slate-600 hover:text-amber-600 text-xs sm:text-sm font-medium py-1.5 border-b border-slate-50 transition-colors w-full text-right"
+            >
+              Especialidades
+            </a>
+            <a 
+              href="#porqueelegirnos" 
+              onClick={() => setMenuAbierto(false)}
+              className="text-slate-600 hover:text-amber-600 text-xs sm:text-sm font-medium py-1.5 transition-colors w-full text-right"
+            >
+              Por qué elegirnos
+            </a>
+          </div>
         </div>
       </nav>
 
       {/* HERO SECTION CON IMAGEN DE FONDO */}
       <header 
-        className="relative bg-cover bg-center bg-no-repeat py-11 sm:py-32 px-4 sm:px-6 text-center"
+        className="scroll-mt-20 relative bg-cover bg-center bg-no-repeat py-11 sm:py-32 px-4 sm:px-6 text-center"
         style={{ backgroundImage: `url(${heroBg})` }}
+        id='hero'
       >
         {/* Capa superpuesta (Overlay) para oscurecer el fondo y dar contraste al texto */}
         <div className="absolute inset-0 bg-slate-950/35 backdrop-blur-xs"></div>
@@ -142,12 +230,17 @@ export default function EstudioAnaFernandez() {
         <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center gap-6">
           <div className="w-12 h-[2px] bg-amber-500 mb-2"></div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black tracking-tight text-white leading-tight max-w-4xl">
-            Soluciones Legales con <br className="hidden sm:inline" />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-amber-300 to-slate-200">
-              Compromiso y Transparencia
-            </span>
-          </h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-black tracking-tight text-white leading-tight max-w-4xl flex flex-col gap-2 sm:gap-4">
+              <span className="text-xs sm:text-sm font-sans font-bold text-amber-400 uppercase tracking-widest block">
+                Estudio Jurídico Integral
+              </span>
+              <span>
+                Dra. Ana Fernández
+              </span>
+              <span className="text-xl sm:text-2xl md:text-3xl font-sans font-medium text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-amber-300 to-slate-200 normal-case tracking-normal">
+                Abogada • Directora de A|F & Asociados
+              </span>
+            </h1>
           
           <p className="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl font-normal leading-relaxed">
             Defendemos sus derechos con la máxima rigurosidad técnica y humana. Un enfoque moderno y eficiente adaptado a sus necesidades jurídicas.
@@ -170,99 +263,134 @@ export default function EstudioAnaFernandez() {
         </div>
       </header>
 
-        {/* SECCIÓN: SOBRE MÍ (DRA. ANA FERNÁNDEZ) - CORREGIDA PARA MÓVILES */}
-        <section id="sobre-mi" className="bg-white py-16 px-4 sm:px-6 border-t border-slate-100">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+        {/* SECCIÓN 1: SOBRE MÍ (PERFIL ACTUAL Y EJERCICIO PROFESIONAL) */}
+        <section id="sobre-mi" className="scroll-mt-52 sm:scroll-mt-28 lg:scroll-mt-18 bg-white py-18 px-4 sm:px-6 border-t border-slate-100">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             
-            {/* TÍTULO DE LA SECCIÓN: Se muestra arriba de todo en celulares, y desaparece en PC */}
-            <div className="block md:hidden text-center mb-4">
-              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Trayectoria Profesional</span>
-              <h2 className="text-2xl font-serif font-bold text-slate-900 mt-1">Sobre la Directora del Estudio</h2>
-              <div className="h-[2px] w-12 bg-amber-500 mt-2 mx-auto"></div>
-            </div>
-
-            {/* Columna Izquierda: Foto de perfil (ESTÁTICA EN CELULARES, STICKY SOLO EN PC) */}
-            <div className="md:col-span-4 flex flex-col items-center md:items-start gap-4 md:sticky md:top-24 z-10">
-              <div className="w-full max-w-[260px] md:max-w-full aspect-3/4 bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 shadow-md relative group">
+            {/* Foto de perfil */}
+            <div className="md:col-span-4 flex flex-col items-center md:items-start gap-4">
+              <div className="w-full max-w-[260px] md:max-w-full aspect-3/4 bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 shadow-md relative">
                 <img 
                   src={image4} 
-                  alt="Dra. Ana Beatriz Fernández" 
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                  alt="Dra. Ana Fernández" 
+                  className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 w-full h-[4px] bg-amber-500"></div>
               </div>
+            </div>
+
+            {/* Texto Institucional Ajustado */}
+            <div className="md:col-span-8 flex flex-col gap-4.5 text-center md:text-left">
+              <div>
+                <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Dirección del Estudio</span>
+                <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mt-1">Dra. Ana Fernández</h2>
+                <p className="text-amber-600 text-xs sm:text-sm font-bold uppercase tracking-wider mt-1">Abogada</p>
+              </div>
               
-              <div className="text-center md:text-left">
-                <h4 className="font-serif font-bold text-slate-900 text-lg">Dra. Ana B. Fernández</h4>
-                <p className="text-amber-600 text-xs font-bold uppercase tracking-wider">Abogada & Escribana</p>
-                <p className="text-slate-400 text-[11px] font-mono mt-1">Misiones, Argentina</p>
+              <div className="h-[2px] w-12 bg-amber-500 mx-auto md:mx-0 my-1"></div>
+              
+              <div className="text-slate-600 text-xs sm:text-sm leading-relaxed flex flex-col gap-4 text-justify md:text-left">
+                <p>
+                  La Dra. Ana Fernández es directora de <strong className="text-slate-900">A|F & Asociados</strong>, un estudio jurídico comprometido con la excelencia, la innovación y la defensa integral de los derechos de sus clientes.
+                </p>
+                <p>
+                  Actualmente, su ejercicio profesional se concentra con especial énfasis en las áreas de <strong className="text-slate-900">Derecho de Familia, Derecho Civil y Sucesiones</strong>, brindando además un respaldo estratégico en materia <strong className="text-slate-900">Penal</strong> como fuero derivado. Su enfoque se caracteriza por una atención personalizada y un profundo compromiso con cada caso.
+                </p>
+                <p>
+                  En <strong className="text-slate-900">A|F & Asociados</strong> entendemos que detrás de cada expediente hay una historia que merece ser escuchada y defendida con seriedad, compromiso y excelencia. Por ello, trabajamos con un único objetivo: ofrecer a cada cliente la mejor estrategia jurídica para proteger sus derechos y alcanzar resultados concretos.
+                </p>
+              </div>
+
+              <div className="mt-2 text-center md:text-left">
+                <p className="text-amber-700 font-serif italic text-xs sm:text-sm font-medium">
+                  Excelencia jurídica. Compromiso absoluto. Confianza construida sobre resultados.
+                </p>
               </div>
             </div>
 
-            {/* Columna Derecha: Trayectoria y Logros */}
-            <div className="md:col-span-8 flex flex-col gap-6">
-              {/* TÍTULO EN PC: Se oculta en celulares y aparece ordenado a la derecha en PC */}
-              <div className="hidden md:flex flex-col gap-2">
-                <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Trayectoria Profesional</span>
-                <h2 className="text-3xl font-serif font-bold text-slate-900">Sobre la Directora del Estudio</h2>
-                <div className="h-[2px] w-12 bg-amber-500 mt-2"></div>
-              </div>
-
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-center md:text-left">
-                Con una sólida formación de grado y postgrado, la Dra. Ana Beatriz Fernández lidera este espacio jurídico brindando soluciones de alta rigurosidad técnica. Su enfoque combina la actualización normativa constante con el compromiso humano e institucional en la provincia de Misiones.
-              </p>
-
-              {/* Bloques de Formación Destacada */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                
-                <div className="bg-slate-50 border border-slate-200/50 p-4 rounded-xl flex flex-col gap-1">
-                  <span className="text-lg">🎓</span>
-                  <h5 className="font-serif font-bold text-slate-900 text-sm">Formación de Grado</h5>
-                  <ul className="text-slate-500 text-[12px] list-disc list-inside leading-relaxed flex flex-col gap-0.5">
-                    <li><strong className="text-slate-700">Abogada</strong> – Univ. Católica de Salta (2016).</li>
-                    <li><strong className="text-slate-700">Escribana</strong> – Universidad Gastón Dachary (2017).</li>
-                  </ul>
-                </div>
-
-                <div className="bg-slate-50 border border-slate-200/50 p-4 rounded-xl flex flex-col gap-1">
-                  <span className="text-lg">⚖️</span>
-                  <h5 className="font-serif font-bold text-slate-900 text-sm">Especialización Jurídica</h5>
-                  <ul className="text-slate-500 text-[12px] list-disc list-inside leading-relaxed flex flex-col gap-0.5">
-                    <li><strong className="text-slate-700">Especialista en Derecho Procesal</strong> (2018).</li>
-                    <li>Diplomada en <strong className="text-slate-700">Defensa Int. de DD.HH.</strong> (Alcala/Zaragoza).</li>
-                    <li>Maestría en <strong className="text-slate-700">Derecho de Familia, Niñez y Adolescencia</strong> (UNNE - En curso).</li>
-                  </ul>
-                </div>
-
-              </div>
-
-              {/* Destacado del Consejo de la Magistratura */}
-              <div className="bg-amber-500/5 border border-amber-500/20 p-5 rounded-xl flex flex-col sm:flex-row gap-4 items-start mt-2">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-xl shrink-0 mx-auto sm:mx-0">
-                  🏅
-                </div>
-                <div className="flex flex-col gap-1.5 text-center sm:text-left">
-                  <span className="bg-amber-500/20 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider self-center sm:self-start">
-                    Respaldo Institucional
-                  </span>
-                  <h5 className="font-serif font-bold text-slate-900 text-sm">
-                    Postulante Seleccionada en Terna Oficial (Concurso N° 277/23)
-                  </h5>
-                  <p className="text-slate-600 text-[12px] leading-relaxed">
-                    Evaluada por el <strong className="text-slate-800">Consejo de la Magistratura de la Provincia de Misiones</strong> para ocupar el cargo de Defensor Oficial de Primera Instancia en lo Civil, Comercial, Laboral, de Familia y Violencia Familiar N°1 de Puerto Iguazú. 
-                  </p>
-                  <blockquote className="border-l-2 border-amber-500 pl-3 italic text-slate-500 text-[11px] mt-1 text-left">
-                    "Conoce la materia y la función a la que se postula. Acredita formación y vocación." <span className="text-slate-400 not-italic">— Res. Pl. CM Nº 17/24.</span>
-                  </blockquote>
-                </div>
-              </div>
-
-            </div>
           </div>
         </section>
 
+
+        {/* SECCIÓN 2: APARTADO DE FORMACIÓN ACADÉMICA COMPLETA */}
+        <section id="academia" className="scroll-mt-48 sm:scroll-mt-28 lg:scroll-mt-24 bg-slate-50 py-16 sm:py-20 px-4 sm:px-6 border-t border-slate-200/60">
+          <div className="max-w-5xl mx-auto flex flex-col gap-10">
+            
+            {/* Título del apartado */}
+            <div className="text-center md:text-left">
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Trayectoria y Credenciales</span>
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mt-1">Formación Académica</h2>
+              <div className="h-[2px] w-12 bg-amber-500 mt-2 mx-auto md:mx-0"></div>
+            </div>
+
+            {/* Distribución de Títulos */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+              
+              {/* Bloque Izquierdo: Grado, Postgrados y Docencia */}
+              <div className="md:col-span-7 flex flex-col gap-4">
+                <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-2xs flex flex-col gap-4">
+                  
+                  <ul className="text-slate-500 text-[11px] sm:text-xs flex flex-col gap-3 list-none">
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-amber-500 shrink-0 mt-0.5">🎓</span>
+                      <span><strong className="text-slate-700 block">Títulos de Grado:</strong> Abogada (Universidad Católica de Salta, 2016) • Escribana (Universidad Gastón Dachary, 2017).</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-amber-500 shrink-0 mt-0.5">⚖️</span>
+                      <span><strong className="text-slate-700 block">Especialización Jurídica:</strong> Especialista en Derecho Procesal (Universidad Gastón Dachary, 2018).</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-amber-500 shrink-0 mt-0.5">👨‍🏫</span>
+                      <span><strong className="text-slate-700 block">Formación en Docencia:</strong> Capacitación y competencias en Docencia Superior Universitaria (UCASAL).</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-amber-500 shrink-0 mt-0.5">🌍</span>
+                      <span><strong className="text-slate-700 block">Diplomado Internacional:</strong> Defensa Internacional de Derechos Humanos (Univ. de Alcalá, Univ. de Zaragoza y CLADH, 2017).</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="text-amber-500 shrink-0 mt-0.5">⏳</span>
+                      <span><strong className="text-slate-700 block">Estudios de Maestría (En Curso):</strong> Maestría en Derecho de Familia, Niñez y Adolescencia (Facultad de Derecho y Ciencias Políticas - UNNE).</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Bloque Derecho: Consejo de la Magistratura */}
+              <div className="md:col-span-5">
+                <div className="bg-amber-500/5 border border-amber-500/20 p-6 rounded-2xl flex flex-col gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-xl">
+                    🏅
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <span className="bg-amber-500/20 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider self-start">
+                      Respaldo Institucional
+                    </span>
+                    <p className="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed">
+                      Su destacada trayectoria profesional fue reconocida por el Consejo de la Magistratura de la Provincia de Misiones, al integrar la terna oficial para el cargo de Defensora Oficial de Primera Instancia...
+                    </p>
+                    <p className="text-slate-600 text-xs leading-relaxed">
+                      ...distinción que refleja su excelencia académica, capacidad técnica y vocación por el servicio de justicia.
+                    </p>
+                    <blockquote className="border-l-2 border-amber-500 pl-3 italic text-slate-500 text-[11px] bg-white/60 p-2 rounded-r-md mt-1">
+                      "Conoce la materia y la función a la que se postula. Acredita formación y vocación." 
+                      <span className="block text-slate-400 not-italic text-[10px] mt-1">— Res. Pl. CM Nº 17/24.</span>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+          {/* DIVISOR ELEGANTE DESVANECIDO EN LOS LATERALES */}
+          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="h-[3px] w-full bg-linear-to-r from-transparent via-amber-500 to-transparent"></div>
+          </div>
+
         {/* SECCIÓN ESPECIALIDADES CON FOTOS */}
-        <section id="especialidades" className="max-w-6xl mx-auto px-4 sm:px-6 py-16 border-t border-slate-100">
+        <section id="especialidades" className="scroll-mt-48 sm:scroll-mt-28 lg:scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-20 border-t border-slate-100">
           <div className="text-center sm:text-left mb-12">
             <span className="text-xs font-bold text-amber-600 uppercase tracking-widest block mb-2">Servicios Profesionales</span>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">Especialidades del Estudio</h2>
@@ -303,60 +431,65 @@ export default function EstudioAnaFernandez() {
           </div>
         </section>
 
-        {/* SECCIÓN: POR QUÉ ELEGIR EL ESTUDIO (ADAPTADA AL CV DE LA DRA.) */}
-        <section className="bg-slate-50 py-16 px-4 sm:px-6 border-t border-amber-500">
+           {/* DIVISOR ELEGANTE DESVANECIDO EN LOS LATERALES */}
+          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="h-[3px] w-full bg-linear-to-r from-transparent via-amber-500 to-transparent"></div>
+          </div>
+
+        {/* SECCIÓN: POR QUÉ ELEGIR EL ESTUDIO */}
+        <section id='porqueelegirnos' className="scroll-mt-48 bg-slate-50 py-18 px-4 sm:px-6 border-t border-slate-100">
           <div className="max-w-5xl mx-auto flex flex-col gap-12">
             
-            {/* Título de la sección */}
+            {/* Título */}
             <div className="text-center max-w-xl mx-auto flex flex-col gap-2">
-              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Nuestros Pilares</span>
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Nuestros Valores</span>
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
                 ¿Por qué elegir nuestro respaldo jurídico?
               </h2>
               <p className="text-slate-500 text-xs sm:text-sm">
-                Garantizamos un servicio basado en la excelencia académica, la versatilidad legal y una sólida trayectoria institucional en Misiones.
+                Un servicio legal basado en la solidez técnica, la actualización académica rigurosa y la total transparencia institucional.
               </p>
             </div>
 
-            {/* Grilla de los 3 pilares basados en el CV */}
+            {/* Grilla de los 3 pilares */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               
-              {/* Pilar 1: Doble Matrícula */}
-              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
-                  📜
-                </div>
-                <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Perfil de Abogada y Escribana
-                </h4>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Una combinación profesional que otorga una visión integral. Permite abordar los conflictos procesales y los actos de fe pública con la máxima seguridad jurídica.
-                </p>
-              </div>
-
-              {/* Pilar 2: Especialización */}
-              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
-                  🎓
-                </div>
-                <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Especialización Avanzada
-                </h4>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Formación de postgrado enfocada en Derecho Procesal, Argumentación Jurídica y una maestría en curso orientada al Derecho de Familia, Niñez y Adolescencia.
-                </p>
-              </div>
-
-              {/* Pilar 3: Respaldo de Terna Oficial */}
+              {/* Pilar 1 */}
               <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
                 <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
                   ⚖️
                 </div>
                 <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Idoneidad Institucional
+                  Enfoque Estratégico Real
                 </h4>
                 <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Distinguida en terna oficial por el Consejo de la Magistratura para la Defensoría de Puerto Iguazú, acreditando solvencia técnica y vocación de servicio.
+                  Soluciones eficaces y personalizadas orientadas a resultados concretos. Cada caso es analizado bajo una estricta perspectiva procesal avanzada.
+                </p>
+              </div>
+
+              {/* Pilar 2 */}
+              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
+                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
+                  🎓
+                </div>
+                <h4 className="font-serif font-bold text-slate-900 text-base">
+                  Formación de Postgrado
+                </h4>
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                  Actualización científica permanente respaldada por estudios avanzados en Derecho Procesal, Docencia Universitaria y una Maestría en curso en Familia y Niñez.
+                </p>
+              </div>
+
+              {/* Pilar 3 */}
+              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
+                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
+                  🏅
+                </div>
+                <h4 className="font-serif font-bold text-slate-900 text-base">
+                  Idoneidad Certificada
+                </h4>
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                  Reconocimiento técnico externo e institucional avalado por el Consejo de la Magistratura al haber integrado la terna oficial para la magistratura provincial.
                 </p>
               </div>
 
@@ -365,7 +498,7 @@ export default function EstudioAnaFernandez() {
         </section>        
 
         {/* SECCIÓN CONTACTO: FORMULARIO INTERACTIVO AVANZADO */}
-        <section id="contacto" className="bg-slate-900 text-white py-16 px-4 sm:px-6 relative overflow-hidden">
+        <section id="contacto" className="scroll-mt-12 sm:scroll-mt-28 lg:scroll-mt-18 bg-slate-900 text-white py-16 px-4 sm:px-6 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
           
           <div className="max-w-3xl mx-auto text-center flex flex-col gap-8 relative z-10">
@@ -596,7 +729,7 @@ export default function EstudioAnaFernandez() {
         href="https://wa.me/5493757449422?text=Hola%20Dra.%20Ana%20Fernandez%2C%20vi%20el%20boceto%20de%20su%20sitio%20web%20y%20me%20gustar%C3%ADa%20realizar%20una%20consulta%20legal.%20Quedo%20atento%2Fa%20para%20coordinar%20una%20entrevista.%20Muchas%20gracias."
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-white border border-amber-500/80 rounded-full shadow-xl hover:shadow-amber-500/20 hover:scale-110 transition-all duration-300 flex items-center justify-center text-xl group cursor-pointer"
+        className="fixed bottom-18 right-6 z-50 w-14 h-14 bg-white border border-amber-500/80 rounded-full shadow-xl hover:shadow-amber-500/20 hover:scale-110 transition-all duration-300 flex items-center justify-center text-xl group cursor-pointer"
         aria-label="Contactar por WhatsApp"
       >
         {/* Sutil efecto de pulso dorado rodeando el botón */}

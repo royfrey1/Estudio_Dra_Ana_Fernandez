@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import image1 from './assets/civil.avif';
 import image2 from './assets/laboral.avif'; 
 import image3 from './assets/familiar.avif';
+import image4 from './assets/imagen1.jpg';
 import heroBg from './assets/bghero.jpg';
 import logoIcono from './assets/logo.png';
 
@@ -73,24 +74,24 @@ export default function EstudioAnaFernandez() {
     }
   };
 
-  // Áreas de práctica para demostrarle que entendés su rubro
+  
   const especialidades = [
-  { 
-    titulo: "Derecho Civil & Comercial", 
-    desc: "Contratos, sucesiones, daños y perjuicios, y asesoramiento societario integral.",
-    imagen: image1
-  },
-  { 
-    titulo: "Derecho Laboral", 
-    desc: "Defensa del trabajador y asesoramiento a empresas, despidos, accidentes y paritarias.",
-    imagen: image2
-  },
-  { 
-    titulo: "Familia y Sucesiones", 
-    desc: "Divorcios, cuotas alimentarias, regímenes de comunicación y gestiones sucesorias.",
-    imagen: image3
-  },
-];
+    { 
+      titulo: "Familia, Niñez y Adolescencia", 
+      desc: "Especialización en divorcios, responsabilidad parental, cuotas alimentarias, regímenes de comunicación, violencia familiar y protección integral de los derechos de NNA.",
+      imagen: image3
+    },
+    { 
+      titulo: "Derecho Civil, Comercial y Sucesiones", 
+      desc: "Asesoramiento procesal avanzado en contratos, reclamos por daños y perjuicios, gestiones sucesorias, herencias y derecho societario integral.",
+      imagen: image1
+    },
+    { 
+      titulo: "Derecho Laboral y Riesgos de Trabajo", 
+      desc: "Especialización y actualización en relaciones de trabajo, despidos, accidentes laborales (ART), paritarias y asesoramiento corporativo.",
+      imagen: image2
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] text-slate-800 font-sans antialiased">
@@ -131,7 +132,7 @@ export default function EstudioAnaFernandez() {
 
       {/* HERO SECTION CON IMAGEN DE FONDO */}
       <header 
-        className="relative bg-cover bg-center bg-no-repeat py-20 sm:py-32 px-4 sm:px-6 text-center"
+        className="relative bg-cover bg-center bg-no-repeat py-11 sm:py-32 px-4 sm:px-6 text-center"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
         {/* Capa superpuesta (Overlay) para oscurecer el fondo y dar contraste al texto */}
@@ -168,6 +169,97 @@ export default function EstudioAnaFernandez() {
           </div>
         </div>
       </header>
+
+        {/* SECCIÓN: SOBRE MÍ (DRA. ANA FERNÁNDEZ) - CORREGIDA PARA MÓVILES */}
+        <section id="sobre-mi" className="bg-white py-16 px-4 sm:px-6 border-t border-slate-100">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            
+            {/* TÍTULO DE LA SECCIÓN: Se muestra arriba de todo en celulares, y desaparece en PC */}
+            <div className="block md:hidden text-center mb-4">
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Trayectoria Profesional</span>
+              <h2 className="text-2xl font-serif font-bold text-slate-900 mt-1">Sobre la Directora del Estudio</h2>
+              <div className="h-[2px] w-12 bg-amber-500 mt-2 mx-auto"></div>
+            </div>
+
+            {/* Columna Izquierda: Foto de perfil (ESTÁTICA EN CELULARES, STICKY SOLO EN PC) */}
+            <div className="md:col-span-4 flex flex-col items-center md:items-start gap-4 md:sticky md:top-24 z-10">
+              <div className="w-full max-w-[260px] md:max-w-full aspect-3/4 bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 shadow-md relative group">
+                <img 
+                  src={image4} 
+                  alt="Dra. Ana Beatriz Fernández" 
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                />
+                <div className="absolute bottom-0 left-0 w-full h-[4px] bg-amber-500"></div>
+              </div>
+              
+              <div className="text-center md:text-left">
+                <h4 className="font-serif font-bold text-slate-900 text-lg">Dra. Ana B. Fernández</h4>
+                <p className="text-amber-600 text-xs font-bold uppercase tracking-wider">Abogada & Escribana</p>
+                <p className="text-slate-400 text-[11px] font-mono mt-1">Misiones, Argentina</p>
+              </div>
+            </div>
+
+            {/* Columna Derecha: Trayectoria y Logros */}
+            <div className="md:col-span-8 flex flex-col gap-6">
+              {/* TÍTULO EN PC: Se oculta en celulares y aparece ordenado a la derecha en PC */}
+              <div className="hidden md:flex flex-col gap-2">
+                <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Trayectoria Profesional</span>
+                <h2 className="text-3xl font-serif font-bold text-slate-900">Sobre la Directora del Estudio</h2>
+                <div className="h-[2px] w-12 bg-amber-500 mt-2"></div>
+              </div>
+
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-center md:text-left">
+                Con una sólida formación de grado y postgrado, la Dra. Ana Beatriz Fernández lidera este espacio jurídico brindando soluciones de alta rigurosidad técnica. Su enfoque combina la actualización normativa constante con el compromiso humano e institucional en la provincia de Misiones.
+              </p>
+
+              {/* Bloques de Formación Destacada */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+                
+                <div className="bg-slate-50 border border-slate-200/50 p-4 rounded-xl flex flex-col gap-1">
+                  <span className="text-lg">🎓</span>
+                  <h5 className="font-serif font-bold text-slate-900 text-sm">Formación de Grado</h5>
+                  <ul className="text-slate-500 text-[12px] list-disc list-inside leading-relaxed flex flex-col gap-0.5">
+                    <li><strong className="text-slate-700">Abogada</strong> – Univ. Católica de Salta (2016).</li>
+                    <li><strong className="text-slate-700">Escribana</strong> – Universidad Gastón Dachary (2017).</li>
+                  </ul>
+                </div>
+
+                <div className="bg-slate-50 border border-slate-200/50 p-4 rounded-xl flex flex-col gap-1">
+                  <span className="text-lg">⚖️</span>
+                  <h5 className="font-serif font-bold text-slate-900 text-sm">Especialización Jurídica</h5>
+                  <ul className="text-slate-500 text-[12px] list-disc list-inside leading-relaxed flex flex-col gap-0.5">
+                    <li><strong className="text-slate-700">Especialista en Derecho Procesal</strong> (2018).</li>
+                    <li>Diplomada en <strong className="text-slate-700">Defensa Int. de DD.HH.</strong> (Alcala/Zaragoza).</li>
+                    <li>Maestría en <strong className="text-slate-700">Derecho de Familia, Niñez y Adolescencia</strong> (UNNE - En curso).</li>
+                  </ul>
+                </div>
+
+              </div>
+
+              {/* Destacado del Consejo de la Magistratura */}
+              <div className="bg-amber-500/5 border border-amber-500/20 p-5 rounded-xl flex flex-col sm:flex-row gap-4 items-start mt-2">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-xl shrink-0 mx-auto sm:mx-0">
+                  🏅
+                </div>
+                <div className="flex flex-col gap-1.5 text-center sm:text-left">
+                  <span className="bg-amber-500/20 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider self-center sm:self-start">
+                    Respaldo Institucional
+                  </span>
+                  <h5 className="font-serif font-bold text-slate-900 text-sm">
+                    Postulante Seleccionada en Terna Oficial (Concurso N° 277/23)
+                  </h5>
+                  <p className="text-slate-600 text-[12px] leading-relaxed">
+                    Evaluada por el <strong className="text-slate-800">Consejo de la Magistratura de la Provincia de Misiones</strong> para ocupar el cargo de Defensor Oficial de Primera Instancia en lo Civil, Comercial, Laboral, de Familia y Violencia Familiar N°1 de Puerto Iguazú. 
+                  </p>
+                  <blockquote className="border-l-2 border-amber-500 pl-3 italic text-slate-500 text-[11px] mt-1 text-left">
+                    "Conoce la materia y la función a la que se postula. Acredita formación y vocación." <span className="text-slate-400 not-italic">— Res. Pl. CM Nº 17/24.</span>
+                  </blockquote>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
 
         {/* SECCIÓN ESPECIALIDADES CON FOTOS */}
         <section id="especialidades" className="max-w-6xl mx-auto px-4 sm:px-6 py-16 border-t border-slate-100">
@@ -211,60 +303,60 @@ export default function EstudioAnaFernandez() {
           </div>
         </section>
 
-        {/* SECCIÓN: POR QUÉ ELEGIR EL ESTUDIO (TRES PILARES) */}
+        {/* SECCIÓN: POR QUÉ ELEGIR EL ESTUDIO (ADAPTADA AL CV DE LA DRA.) */}
         <section className="bg-slate-50 py-16 px-4 sm:px-6 border-t border-amber-500">
           <div className="max-w-5xl mx-auto flex flex-col gap-12">
             
             {/* Título de la sección */}
             <div className="text-center max-w-xl mx-auto flex flex-col gap-2">
-              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Nuestros Valores</span>
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Nuestros Pilares</span>
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
                 ¿Por qué elegir nuestro respaldo jurídico?
               </h2>
               <p className="text-slate-500 text-xs sm:text-sm">
-                Ofrecer un servicio de calidad y excelencia, que provea al cliente de herramientas costo-eficientes modernas para la toma de decisiones.
+                Garantizamos un servicio basado en la excelencia académica, la versatilidad legal y una sólida trayectoria institucional en Misiones.
               </p>
             </div>
 
-            {/* Grilla de los 3 pilares: 1 columna en celu, 3 en PC */}
+            {/* Grilla de los 3 pilares basados en el CV */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               
-              {/* Pilar 1: Confidencialidad */}
+              {/* Pilar 1: Doble Matrícula */}
               <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
                 <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
-                  🛡️
+                  📜
                 </div>
                 <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Máxima Confidencialidad
+                  Perfil de Abogada y Escribana
                 </h4>
                 <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Cada caso se trata bajo estricto secreto profesional, garantizando absoluta reserva y la total tranquilidad de nuestros clientes.
+                  Una combinación profesional que otorga una visión integral. Permite abordar los conflictos procesales y los actos de fe pública con la máxima seguridad jurídica.
                 </p>
               </div>
 
-              {/* Pilar 2: Experiencia */}
+              {/* Pilar 2: Especialización */}
+              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
+                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
+                  🎓
+                </div>
+                <h4 className="font-serif font-bold text-slate-900 text-base">
+                  Especialización Avanzada
+                </h4>
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                  Formación de postgrado enfocada en Derecho Procesal, Argumentación Jurídica y una maestría en curso orientada al Derecho de Familia, Niñez y Adolescencia.
+                </p>
+              </div>
+
+              {/* Pilar 3: Respaldo de Terna Oficial */}
               <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
                 <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
                   ⚖️
                 </div>
                 <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Experiencia y Trayectoria
+                  Idoneidad Institucional
                 </h4>
                 <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Contamos con un equipo con amplio recorrido técnico y legal, ofreciendo un asesoramiento riguroso y adaptado a la normativa vigente.
-                </p>
-              </div>
-
-              {/* Pilar 3: Soluciones Modernas */}
-              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-lg shadow-2xs">
-                  ✨
-                </div>
-                <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Soluciones Modernas
-                </h4>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Incorporamos herramientas digitales para un seguimiento ágil del expediente, optimizando tiempos y reduciendo costos procesales.
+                  Distinguida en terna oficial por el Consejo de la Magistratura para la Defensoría de Puerto Iguazú, acreditando solvencia técnica y vocación de servicio.
                 </p>
               </div>
 
@@ -440,7 +532,7 @@ export default function EstudioAnaFernandez() {
                 
                 {/* Instagram */}
                 <a 
-                  href="https://instagram.com" 
+                  href="https://www.instagram.com/dra_anafernandez/" 
                   target="_blank" 
                   rel="noreferrer"
                   className="w-12 h-12 rounded-full bg-slate-950 border border-amber-500/30 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-amber-500 shadow-xs group cursor-pointer"
@@ -451,7 +543,7 @@ export default function EstudioAnaFernandez() {
 
                 {/* LinkedIn (Fundamental para Abogados) */}
                 <a 
-                  href="https://linkedin.com" 
+                  href="https://www.linkedin.com/in/dra-ana-fern%C3%A1ndez-43601221b/" 
                   target="_blank" 
                   rel="noreferrer"
                   className="w-12 h-12 rounded-full bg-slate-950 border border-amber-500/30 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-amber-500 shadow-xs group cursor-pointer"

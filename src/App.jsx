@@ -163,7 +163,7 @@ export default function EstudioAnaFernandez() {
               target="_blank"
               rel="noreferrer"
               className="inline-block whitespace-nowrap border border-amber-400/40 bg-linear-to-r from-amber-500/10 to-amber-600/10 hover:from-amber-500 hover:to-amber-600 hover:text-white text-amber-700 font-bold rounded-md transition-all uppercase tracking-wider cursor-pointer
-                        text-[10px] sm:text-xs px-2.5 py-1.5 sm:px-4 sm:py-2"
+                        text-[10px] sm:text-xs px-1 py-1.5 sm:px-4 sm:py-2"
             >
               WhatsApp <span className="hidden sm:inline">Directo</span>
             </a>

@@ -17,41 +17,27 @@ export default function EstudioAnaFernandez() {
   const [enviando, setEnviando] = useState(false);
   const [mostrarModalExito, setMostrarModalExito] = useState(false);
  
+  const [mostrarPoliticas, setMostrarPoliticas] = useState(false);
+
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   const handleEnviarConsulta = async (e) => {
     e.preventDefault();
     setEnviando(true);
 
-    // Mapeo de valores técnicos a etiquetas legibles para el mensaje
+    // Mapeo de valores técnicos a etiquetas legibles alineado con las especialidades de la Dra.
     const motivosLabels = {
-      civil: "Derecho Civil (Contratos, Alquileres, Daños)",
-      comercial: "Derecho Comercial & Societario",
-      laboral_trabajador: "Derecho Laboral (Defensa del Trabajador)",
-      laboral_empresa: "Asesoramiento Laboral Empresarial",
-      familia: "Familia (Divorcios, Alimentos)",
+      familia: "Derecho de Familia (Divorcios, Alimentos, Cuidado Personal)",
       sucesiones: "Sucesiones y Herencias",
+      civil: "Derecho Civil (Sucesiones, Contratos, Daños y Perjuicios)",
+      penal: "Asistencia / Defensa Penal",
       otro: "Otro Motivo / Consulta General"
     };
 
     const motivoTexto = motivosLabels[motivo] || "No especificado";
 
     try {
-      // --- PASO A: ENVÍO DE DATOS A FORMSPREE
-      const FORMSPREE_ID = "mrewdbwv"; // Reemplazar por el tuyo o el de la Dra.
-      
-      await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nombre: nombre,
-          telefono: telefono,
-          motivo: motivoTexto,
-          mensaje: consulta
-        })
-      });
-
-      // --- PASO B: REDIRECCIÓN A WHATSAPP
+      // --- REDIRECCIÓN DIRECTA A WHATSAPP ---
       const numeroDra = "5493757449422"; 
 
       let mensajeWhatsApp = `⚖️ *NUEVA CONSULTA LEGAL - DRA. ANA FERNÁNDEZ*\n\n`;
@@ -59,17 +45,21 @@ export default function EstudioAnaFernandez() {
       mensajeWhatsApp += `📞 *Teléfono:* ${telefono}\n`;
       mensajeWhatsApp += `📂 *Área:* ${motivoTexto}\n\n`;
       mensajeWhatsApp += `💬 *Consulta:* \n"${consulta}"\n\n`;
-      mensajeWhatsApp += `⏳ _Enviado automáticamente desde la plataforma web._`;
+      mensajeWhatsApp += `⏳ _Enviado desde la plataforma web._`;
 
       const mensajeEncriptado = encodeURIComponent(mensajeWhatsApp);
       window.open(`https://wa.me/${numeroDra}?text=${mensajeEncriptado}`, '_blank');
 
-      // Limpiar el formulario tras el envío exitoso
+      // Limpiar el formulario tras la redirección exitosa
       setNombre('');
       setTelefono('');
       setMotivo('');
       setConsulta('');
-      setMostrarModalExito(true);
+      
+      // Si usás el modal de éxito, lo dejamos activo. Si no, lo podés comentar/borrar.
+      if (typeof setMostrarModalExito === 'function') {
+        setMostrarModalExito(true);
+      }
 
     } catch (error) {
       console.error("Error al despachar la consulta:", error);
@@ -110,6 +100,20 @@ export default function EstudioAnaFernandez() {
       document.body.classList.remove('overflow-hidden');
     };
   }, [menuAbierto]);
+
+  // Evitar que el fondo haga scroll cuando el modal está abierto
+  useEffect(() => {
+    if (mostrarPoliticas) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Limpieza por si el componente se desmonta inesperadamente
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mostrarPoliticas]);
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] text-slate-800 font-sans antialiased">
@@ -805,24 +809,53 @@ export default function EstudioAnaFernandez() {
             </div>
           </section>    
 
-      {/* FOOTER */}
-      <footer className="bg-slate-950 text-slate-400 text-xs py-8 px-4 sm:px-6 border-t border-slate-900 mt-auto">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      {/* Footer */}
+      <footer className="bg-[#0B0F17] text-slate-400 text-xs py-8 px-4 sm:px-6 border-t border-slate-900 mt-auto">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          
+          {/* Botón Volver Arriba */}
           <div className="flex items-center">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="group flex items-center gap-2 text-slate-400 hover:text-amber-400 text-[12px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+              className="group flex items-center gap-2 text-slate-400 hover:text-amber-500 text-[12px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
             >
-              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/60 group-hover:border-amber-500/40 transition-colors">
+              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/30 group-hover:border-amber-500/50 transition-colors">
                 <FontAwesomeIcon icon={faCircleChevronUp}/>
               </span>
               Volver arriba
             </button>
           </div>
 
-            <div className="text-center text-[11px] text-slate-500 font-medium">
-              &copy; {new Date().getFullYear()} Estudio Jurídico <span className="text-slate-300">Dra. Ana Fernández</span>. Todos los derechos reservados. Desarrollado por <span> <a href="https://portfolio-royf.vercel.app/" target="_blank" rel="noreferrer" className="text-amber-500 hover:text-amber-400 underline">Roy Frey</a></span>
-            </div>
+          {/* Enlace a Políticas (Discreto y elegante en el medio/lado) */}
+          <div className="text-center md:text-left">
+            <button 
+              onClick={() => setMostrarPoliticas(true)}
+              className="text-slate-500 hover:text-amber-500 text-[11px] font-medium transition-colors cursor-pointer underline decoration-dotted underline-offset-4"
+            >
+              Políticas de Privacidad y Términos Legales
+            </button>
+          </div>
+
+          {/* Copyright y Firma */}
+          <div className="text-center md:text-right text-[11px] text-slate-500 font-medium flex flex-col gap-1">
+            <p>
+              &copy; {new Date().getFullYear()} Estudio Jurídico <span className="text-slate-300">Dra. Ana Fernández</span>. Todos los derechos reservados.
+            </p>
+            <p>
+              Desarrollado por{" "}
+              <span>
+                <a 
+                  href="https://portfolio-royf.vercel.app/" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="text-amber-500 hover:text-amber-400 underline transition-colors"
+                >
+                  Roy Frey
+                </a>
+              </span>
+            </p>
+          </div>
+
         </div>
       </footer>
 
@@ -872,6 +905,92 @@ export default function EstudioAnaFernandez() {
           </div>
         </div>
       )}
+
+      {/* MODAL DE POLÍTICAS DE PRIVACIDAD Y DERECHOS RESERVADOS */}
+      {mostrarPoliticas && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs animate-fade-in">
+          
+          {/* Contenedor del Modal */}
+          <div className="bg-[#161B26] border border-amber-500/20 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col">
+            
+            {/* Cabecera */}
+            <div className="px-6 py-4 border-b border-slate-800 flex justify-between items-center bg-[#0B0F17]">
+              <div className="flex items-center gap-2">
+                <span className="text-amber-500 text-sm">⚖️</span>
+                <h3 className="text-sm sm:text-base font-serif font-bold text-slate-100 uppercase tracking-wider">
+                  Términos Legales y Privacidad
+                </h3>
+              </div>
+              <button 
+                onClick={() => setMostrarPoliticas(false)}
+                className="text-slate-400 hover:text-amber-500 text-xl font-bold transition-colors cursor-pointer w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-800"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Contenido con Scroll Interno */}
+            <div className="p-6 overflow-y-auto text-slate-300 text-xs sm:text-sm space-y-5 leading-relaxed text-justify">
+              
+              {/* Sección 1 */}
+              <div>
+                <h4 className="font-serif font-bold text-amber-500 uppercase tracking-wide text-xs mb-2">
+                  1. Propiedad Intelectual y Derechos Reservados
+                </h4>
+                <p>
+                  Todo el contenido de este sitio web, incluyendo textos, logotipos, combinaciones de colores, isotipos, códigos fuente y diseños estructurales, es propiedad exclusiva de la <strong className="text-white">Dra. Ana Fernández</strong> y su firma <strong className="text-white">A|F & Asociados</strong>. Queda estrictamente prohibida la reproducción parcial o total, distribución o uso comercial del material expuesto sin autorización previa y por escrito de la titular.
+                </p>
+              </div>
+
+              {/* Sección 2 */}
+              <div>
+                <h4 className="font-serif font-bold text-amber-500 uppercase tracking-wide text-xs mb-2">
+                  2. Política de Privacidad y Tratamiento de Datos
+                </h4>
+                <p>
+                  En cumplimiento con las normativas vigentes de protección de datos personales, le informamos que los datos suministrados por los usuarios en el formulario de contacto (Nombre, Teléfono y Motivo de Consulta) <strong className="text-white">no son almacenados en bases de datos externas de terceros, servidores compartidos ni listas de correos comerciales</strong>. 
+                </p>
+                <p className="mt-2">
+                  La información ingresada se procesa de forma local y se transfiere de manera directa al chat de WhatsApp privado de la profesional mediante un canal cifrado. Al presionar el botón de envío, usted consiente explícitamente esta vía de comunicación directa.
+                </p>
+              </div>
+
+              {/* Sección 3 */}
+              <div>
+                <h4 className="font-serif font-bold text-amber-500 uppercase tracking-wide text-xs mb-2">
+                  3. Confidencialidad y Secreto Profesional
+                </h4>
+                <p>
+                  Toda la información compartida por los usuarios a través de la plataforma web o sus canales derivados de mensajería instantánea está estrictamente protegida bajo el marco del <strong className="text-white">Secreto Profesional Médico-Jurídico</strong>. No se revelarán antecedentes, datos identificatorios ni hechos consultados a ningún tercero bajo ninguna circunstancia, garantizando el resguardo absoluto de su confidencialidad.
+                </p>
+              </div>
+
+              {/* Sección 4 */}
+              <div>
+                <h4 className="font-serif font-bold text-amber-500 uppercase tracking-wide text-xs mb-2">
+                  4. Limitación de Responsabilidad
+                </h4>
+                <p>
+                  El contenido informativo de este sitio web es de carácter orientativo e introductorio. Bajo ninguna circunstancia reemplaza a una consulta jurídica formal o al asesoramiento personalizado con un profesional matriculado en derecho.
+                </p>
+              </div>
+
+            </div>
+
+            {/* Pie del Modal con botón de cierre */}
+            <div className="px-6 py-4 border-t border-slate-800 bg-[#0B0F17] flex justify-end">
+              <button 
+                onClick={() => setMostrarPoliticas(false)}
+                className="bg-slate-800 hover:bg-slate-700 text-white font-sans font-bold text-xs px-5 py-2.5 rounded-lg transition-colors uppercase tracking-wider cursor-pointer"
+              >
+                Entendido / Cerrar
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

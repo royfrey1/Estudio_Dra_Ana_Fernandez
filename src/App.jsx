@@ -3,12 +3,10 @@ import image1 from './assets/civil.jpg';
 import image2 from './assets/penal.avif'; 
 import image3 from './assets/familia.avif';
 import image4 from './assets/imagen1.jpg';
-import heroBg from './assets/bg.jpg';
+import heroBg from './assets/bg4.png';
 import logoIcono from './assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShieldHalved, faUser, faLock, faBullseye, faScaleBalanced, faComments } from '@fortawesome/free-solid-svg-icons';
-import { faGavel, faGraduationCap, faAward } from '@fortawesome/free-solid-svg-icons';
-import { faUsers, faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import { faShieldHalved, faUser, faLock, faCircleChevronUp, faBullseye, faScaleBalanced, faComments, faHandshakeAngle, faBolt, faUsers, faFileSignature, faGavel, faGraduationCap, faAward } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function EstudioAnaFernandez() {
@@ -224,12 +222,12 @@ export default function EstudioAnaFernandez() {
 
       {/* HERO SECTION PREMIUM CON DEGRADADO LATERAL ADAPTATIVO */}
       <header 
-        className="scroll-mt-20 relative bg-[#FAF8F5] bg-no-repeat bg-[length:auto_85%] xs:bg-[length:auto_90%] sm:bg-cover bg-[right_-120px_bottom_0px] xs:bg-[right_-80px_bottom_0px] sm:bg-right lg:bg-center min-h-[calc(100vh-64px)] sm:min-h-[calc(100vh-80px)] flex flex-col justify-between px-4 sm:px-6 lg:px-8 py-5 sm:py-12 overflow-hidden"
+        className="scroll-mt-20 relative bg-[#FAF8F5] bg-no-repeat bg-[length:auto_98%] xs:bg-[length:auto_90%] sm:bg-cover bg-[right_-120px_bottom_0px] xs:bg-[right_-80px_bottom_0px] sm:bg-right lg:bg-center min-h-[calc(100vh-64px)] sm:min-h-[calc(100vh-80px)] flex flex-col justify-between px-4 sm:px-6 lg:px-8 py-5 sm:py-12 overflow-hidden"
         style={{ backgroundImage: `url(${heroBg})` }}
         id='hero'
       >
         {/* CAPA DE DEGRADADO: Asegura total legibilidad en móviles y transiciones suaves en escritorio */}
-        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/80 xs:via-[#FAF8F5]/85 sm:via-[#FAF8F5]/40 to-transparent/10 md:to-transparent z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/60 xs:via-[#FAF8F5]/85 sm:via-[#FAF8F5]/40 to-transparent/10 md:to-transparent z-0"></div>
 
         {/* CONTENEDOR DE TEXTO (Posicionado arriba del degradado con z-10) */}
         <div className="relative z-10 max-w-7xl mx-auto w-full my-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-1 sm:pt-2">
@@ -394,7 +392,7 @@ export default function EstudioAnaFernandez() {
                   Como directora de <strong className="text-slate-900">A|F & Asociados</strong>, lidera un equipo comprometido con el acompañamiento cercano de personas y familias. Su práctica profesional se concentra en resolver conflictos complejos con la máxima empatía, responsabilidad y profesionalismo, brindando soluciones eficaces adaptadas a las necesidades particulares de cada caso.
                 </p>
                 <p>
-                  Bajo su dirección, el estudio también brinda un respaldo integral en las áreas de <strong className="text-slate-900">Derecho Civil y Sucesiones</strong>, además de ofrecer asistencia estratégica en materia <strong className="text-slate-900">Penal</strong>. En <strong className="text-slate-900">A|F & Asociados</strong> entendemos que detrás de cada consulta hay una historia de vida que merece ser escuchada y defendida con absoluta seriedad y excelencia.
+                  Bajo su dirección, el estudio también brinda un respaldo integral en las áreas de <strong className="text-slate-900">Derecho Civil</strong>, además de ofrecer asistencia estratégica en materia <strong className="text-slate-900">Penal</strong>. En <strong className="text-slate-900">A|F & Asociados</strong> entendemos que detrás de cada consulta hay una historia de vida que merece ser escuchada y defendida con absoluta seriedad y excelencia.
                 </p>
               </div>
 
@@ -527,60 +525,79 @@ export default function EstudioAnaFernandez() {
           </div>
 
         {/* SECCIÓN: POR QUÉ ELEGIR EL ESTUDIO */}
-        <section id='porqueelegirnos' className="scroll-mt-52 sm:scroll-mt-28 lg:scroll-mt-18 bg-slate-50 py-18 px-4 sm:px-6 border-t border-slate-100">
-          <div className="max-w-5xl mx-auto flex flex-col gap-12">
+        <section id="porqueelegirnos" className="scroll-mt-20 bg-[#FAF8F5]/50 py-16 px-4 sm:px-6 lg:px-8 border-t border-b border-slate-100">
+          <div className="max-w-7xl mx-auto flex flex-col gap-12">
             
-            {/* Título */}
+            {/* Título de Sección */}
             <div className="text-center max-w-xl mx-auto flex flex-col gap-2">
-              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Nuestros Valores</span>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
-                ¿Por qué elegir nuestro respaldo jurídico?
+              <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Nuestra Propuesta de Valor</span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#1E293B] tracking-tight">
+                ¿Por Qué Elegir Nuestro Estudio?
               </h2>
-              <p className="text-slate-500 text-xs sm:text-sm">
-                Un servicio legal basado en la solidez técnica, la actualización académica rigurosa y la total transparencia institucional.
-              </p>
+              <div className="w-12 h-[2px] bg-amber-500 mx-auto mt-1"></div>
             </div>
 
-            {/* Grilla de los 3 pilares */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Grilla de los 4 Puntos Clave */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               
-              {/* Pilar 1: Enfoque Estratégico */}
-              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 text-sm sm:text-base shadow-2xs">
-                  <FontAwesomeIcon icon={faGavel} />
+              {/* Punto 1: Atención Personalizada */}
+              <div className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col gap-4 text-center md:text-left">
+                <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 text-xl mx-auto md:mx-0 shrink-0">
+                  <FontAwesomeIcon icon={faHandshakeAngle} />
                 </div>
-                <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Enfoque Estratégico Real
-                </h4>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Soluciones eficaces y personalizadas orientadas a resultados concretos. Cada caso es analizado bajo una estricta perspectiva procesal avanzada.
-                </p>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-serif font-bold text-slate-900 text-lg">
+                    Atención Personalizada
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    Acompañamiento directo, comunicación permanente y seguimiento cercano durante todo el proceso judicial.
+                  </p>
+                </div>
               </div>
 
-              {/* Pilar 2: Formación de Postgrado */}
-              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 text-sm sm:text-base shadow-2xs">
-                  <FontAwesomeIcon icon={faGraduationCap} />
+              {/* Punto 2: Defensa Firme */}
+              <div className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col gap-4 text-center md:text-left">
+                <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 text-xl mx-auto md:mx-0 shrink-0">
+                  <FontAwesomeIcon icon={faShieldHalved} />
                 </div>
-                <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Formación de Postgrado
-                </h4>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Actualización científica permanente respaldada por estudios avanzados en Derecho Procesal, Docencia Universitaria y una Maestría en curso en Familia y Niñez.
-                </p>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-serif font-bold text-slate-900 text-lg">
+                    Defensa Firme de sus Derechos
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    Representación legal estratégica, ética y comprometida para resguardar sus derechos e intereses en cada etapa del proceso.
+                  </p>
+                </div>
               </div>
 
-              {/* Pilar 3: Idoneidad Certificada */}
-              <div className="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-xs flex flex-col items-center md:items-start text-center md:text-left gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 text-sm sm:text-base shadow-2xs">
-                  <FontAwesomeIcon icon={faAward} />
+              {/* Punto 3: Gestión Ágil */}
+              <div className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col gap-4 text-center md:text-left">
+                <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 text-xl mx-auto md:mx-0 shrink-0">
+                  <FontAwesomeIcon icon={faBolt} />
                 </div>
-                <h4 className="font-serif font-bold text-slate-900 text-base">
-                  Idoneidad Certificada
-                </h4>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                  Reconocimiento técnico externo e institucional avalado por el Consejo de la Magistratura al haber integrado la terna oficial para la magistratura provincial.
-                </p>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-serif font-bold text-slate-900 text-lg">
+                    Gestión Ágil del Expediente
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    Seguimiento constante e impulso oportuno de cada actuación para procurar el avance eficiente del proceso.
+                  </p>
+                </div>
+              </div>
+
+              {/* Punto 4: Compromiso */}
+              <div className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex flex-col gap-4 text-center md:text-left">
+                <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 text-xl mx-auto md:mx-0 shrink-0">
+                  <FontAwesomeIcon icon={faBullseye} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-serif font-bold text-slate-900 text-lg">
+                    Compromiso con los Resultados
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    Desarrollamos estrategias jurídicas eficaces orientadas a alcanzar la mejor solución posible para cada caso.
+                  </p>
+                </div>
               </div>
 
             </div>
@@ -588,19 +605,20 @@ export default function EstudioAnaFernandez() {
         </section>        
 
         {/* SECCIÓN CONTACTO: FORMULARIO INTERACTIVO AVANZADO */}
-        <section id="contacto" className="scroll-mt-12 sm:scroll-mt-28 lg:scroll-mt-18 bg-slate-900 text-white py-16 px-4 sm:px-6 relative overflow-hidden">
+        <section id="contacto" className="scroll-mt-12 sm:scroll-mt-28 lg:scroll-mt-18 bg-[#0B0F17] text-white py-16 px-4 sm:px-6 relative overflow-hidden border-t border-slate-800">
+          {/* Brillo ambiental dorado de fondo */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
           
           <div className="max-w-3xl mx-auto text-center flex flex-col gap-8 relative z-10">
             <div className="flex flex-col gap-2">
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Contacto Directo</span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold">Consulte su caso de forma confidencial</h2>
-              <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto">
-                Complete los datos de su caso para asignarle una entrevista presencial o virtual con el profesional idóneo.
+              <span className="text-xs font-bold text-amber-500 uppercase tracking-widest">Contacto Directo</span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-100">Consulte su caso de forma confidencial</h2>
+              <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+                Complete el formulario para coordinar una evaluación estratégica de su situación con la Dra. Ana Fernández de forma presencial o virtual.
               </p>
             </div>
 
-            <form onSubmit={handleEnviarConsulta} className="bg-slate-800 border border-slate-700/60 p-6 sm:p-8 rounded-2xl text-left flex flex-col gap-5 shadow-xl">
+            <form onSubmit={handleEnviarConsulta} className="bg-[#161B26] border border-amber-500/10 p-6 sm:p-8 rounded-2xl text-left flex flex-col gap-5 shadow-2xl">
               
               {/* Nombre y Teléfono */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -612,7 +630,7 @@ export default function EstudioAnaFernandez() {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                     placeholder="Ej: Juan Pérez"
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 transition-all"
+                    className="w-full bg-[#0B0F17] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-hidden focus:border-amber-500 transition-all focus:ring-1 focus:ring-amber-500/30"
                   />
                 </div>
                 <div>
@@ -623,12 +641,12 @@ export default function EstudioAnaFernandez() {
                     value={telefono}
                     onChange={(e) => setTelefono(e.target.value)}
                     placeholder="Ej: 3757 123456"
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 transition-all"
+                    className="w-full bg-[#0B0F17] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-hidden focus:border-amber-500 transition-all focus:ring-1 focus:ring-amber-500/30"
                   />
                 </div>
               </div>
 
-              {/* Selector de Área Legal */}
+              {/* Selector de Área Legal - Rediseñado bajo el foco de su práctica */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Motivo Principal de la Consulta</label>
                 <div className="relative">
@@ -636,18 +654,15 @@ export default function EstudioAnaFernandez() {
                     required
                     value={motivo}
                     onChange={(e) => setMotivo(e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-hidden focus:border-amber-500 transition-all appearance-none cursor-pointer"
+                    className="w-full bg-[#0B0F17] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-hidden focus:border-amber-500 transition-all focus:ring-1 focus:ring-amber-500/30 appearance-none cursor-pointer"
                   >
                     <option value="" disabled hidden>Seleccione el área correspondiente...</option>
-                    <option value="civil">Derecho Civil (Contratos, Alquileres, Daños)</option>
-                    <option value="comercial">Derecho Comercial & Societario</option>
-                    <option value="laboral_trabajador">Derecho Laboral (Defensa del Trabajador / Despido)</option>
-                    <option value="laboral_empresa">Asesoramiento Laboral Empresarial</option>
-                    <option value="familia">Familia (Divorcios, Alimentos, Régimen de Visitas)</option>
-                    <option value="sucesiones">Sucesiones y Herencias</option>
+                    <option value="familia">Derecho de Familia (Divorcios, Alimentos, Cuidado Personal)</option>
+                    <option value="civil">Derecho Civil (Sucesiones, Contratos, Daños y Perjuicios)</option>
+                    <option value="penal">Asistencia / Defensa Penal</option>
                     <option value="otro">Otro Motivo / Consulta General</option>
                   </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-amber-500">
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-amber-500 text-xs">
                     ▼
                   </div>
                 </div>
@@ -661,19 +676,19 @@ export default function EstudioAnaFernandez() {
                   required
                   value={consulta}
                   onChange={(e) => setConsulta(e.target.value)}
-                  placeholder="Escriba los detalles relevantes de su caso para que podamos asesorarlo mejor..."
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-hidden focus:border-amber-500 transition-all resize-none"
+                  placeholder="Escriba aquí los detalles más relevantes de su caso para poder brindarle un asesoramiento preciso..."
+                  className="w-full bg-[#0B0F17] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-hidden focus:border-amber-500 transition-all focus:ring-1 focus:ring-amber-500/30 resize-none"
                 />
               </div>
 
-              {/* Botón de envío */}
+              {/* Botón de envío - Premium Dorado */}
               <button 
                 type="submit"
                 disabled={enviando}
-                className={`w-full text-slate-950 font-bold text-xs sm:text-sm py-4 rounded-xl transition-all shadow-md uppercase tracking-wider mt-2 cursor-pointer ${
+                className={`w-full text-slate-950 font-bold text-xs sm:text-sm py-4 rounded-xl transition-all shadow-md uppercase tracking-wider mt-2 cursor-pointer font-sans ${
                   enviando 
-                    ? 'bg-amber-600/50 text-slate-700 cursor-not-allowed' 
-                    : 'bg-linear-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700'
+                    ? 'bg-amber-600/50 text-slate-800 cursor-not-allowed' 
+                    : 'bg-[#D4953C] hover:bg-[#b87d2d] text-white active:scale-[0.98]'
                 }`}
               >
                 {enviando ? "Procesando Solicitud..." : "Solicitar Evaluación de Caso"}
@@ -796,10 +811,10 @@ export default function EstudioAnaFernandez() {
           <div className="flex items-center">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="group flex items-center gap-2 text-slate-400 hover:text-amber-400 text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+              className="group flex items-center gap-2 text-slate-400 hover:text-amber-400 text-[12px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
             >
-              <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-amber-500/40 transition-colors">
-              ▲
+              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/60 group-hover:border-amber-500/40 transition-colors">
+                <FontAwesomeIcon icon={faCircleChevronUp}/>
               </span>
               Volver arriba
             </button>
@@ -807,9 +822,6 @@ export default function EstudioAnaFernandez() {
 
             <div className="text-center text-[11px] text-slate-500 font-medium">
               &copy; {new Date().getFullYear()} Estudio Jurídico <span className="text-slate-300">Dra. Ana Fernández</span>. Todos los derechos reservados. Desarrollado por <span> <a href="https://portfolio-royf.vercel.app/" target="_blank" rel="noreferrer" className="text-amber-500 hover:text-amber-400 underline">Roy Frey</a></span>
-            </div>
-            <div className="hidden md:block w-40 text-[12px] text-slate-600 font-mono">
-              ⚖️ Mat. Profesional N° 12345 - Misiones, Argentina.
             </div>
         </div>
       </footer>
@@ -819,7 +831,7 @@ export default function EstudioAnaFernandez() {
         href="https://wa.me/5493757449422?text=Hola%20Dra.%20Ana%20Fernandez%2C%20vi%20el%20boceto%20de%20su%20sitio%20web%20y%20me%20gustar%C3%ADa%20realizar%20una%20consulta%20legal.%20Quedo%20atento%2Fa%20para%20coordinar%20una%20entrevista.%20Muchas%20gracias."
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-18 right-6 z-50 w-14 h-14 bg-white border border-amber-500/80 rounded-full shadow-xl hover:shadow-amber-500/20 hover:scale-110 transition-all duration-300 flex items-center justify-center text-xl group cursor-pointer"
+        className="fixed bottom-16 right-6 z-50 w-14 h-14 bg-white border border-amber-500/80 rounded-full shadow-xl hover:shadow-amber-500/20 hover:scale-110 transition-all duration-300 flex items-center justify-center text-xl group cursor-pointer"
         aria-label="Contactar por WhatsApp"
       >
         {/* Sutil efecto de pulso dorado rodeando el botón */}

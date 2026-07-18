@@ -536,7 +536,7 @@ export default function EstudioAnaFernandez() {
             <div className="text-center max-w-xl mx-auto flex flex-col gap-2">
               <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Nuestra Propuesta de Valor</span>
               <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#1E293B] tracking-tight">
-                ¿Por Qué Elegir Nuestro Estudio?
+                ¿Por qué elegir nuestro Estudio Jurídico?
               </h2>
               <div className="w-12 h-[2px] bg-amber-500 mx-auto mt-1"></div>
             </div>
